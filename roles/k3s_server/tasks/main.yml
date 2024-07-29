@@ -1,11 +1,11 @@
 ---
-- name: Get k3s installed version
+- name: Get K3s installed version
   ansible.builtin.command: k3s --version
   register: k3s_version_output
   changed_when: false
   ignore_errors: true
 
-- name: Set k3s installed version
+- name: Set K3s installed version
   when: k3s_version_output.rc == 0
   ansible.builtin.set_fact:
     installed_k3s_version: "{{ k3s_version_output.stdout_lines[0].split(' ')[2] }}"
@@ -155,7 +155,7 @@
 
         - name: Change server address in kubeconfig on control node
           ansible.builtin.shell: |
-            KUBECONFIG={{ kubeconfig }} kubectl config set-cluster default --server=https://{{ api_endpoint }}:{{ api_port }}
+            KUBECONFIG={{ kubeconfig }} kubectl config set-cluster default --server=https://{{ hostvars[inventory_hostname].public_ip_address }}:{{ api_port }}
           delegate_to: 127.0.0.1
           become: false
           register: csa_result
