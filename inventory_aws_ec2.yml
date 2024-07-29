@@ -1,0 +1,13 @@
+---
+plugin: amazon.aws.aws_ec2
+regions:
+  - eu-central-1
+strict: false
+keyed_groups:
+  - key: tags['role']
+    separator: ""
+    parent_group: k3s_cluster
+hostnames:
+  - tag:Name
+compose:
+  ansible_host: public_dns_name
