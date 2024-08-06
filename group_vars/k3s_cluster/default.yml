@@ -1,4 +1,4 @@
 ---
 k3s_version: 'v1.30.2+k3s2'
 extra_server_args: '--node-external-ip {{ ansible_default_ipv4.address }} --flannel-iface {{ ansible_default_ipv4.alias }}' 
-extra_agent_args: '--node-external-ip {{ ansible_default_ipv4.address }} --flannel-iface {{ ansible_default_ipv4.alias }}'
+extra_agent_args: '--node-external-ip {{ hostvars[inventory_hostname].public_ip_address }} --flannel-iface {{ ansible_default_ipv4.alias }}'
